@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block body %}
+
+</br>
+</br>
+</br>
+</br>
+<h3 class='text-upercase text-warning  ' style='letter-spacing: 2px;' > Category - {{categorys}}</h3>
+  <div class="row mb-2">
+    {% if post %}
+    {% for post in post %} 
+    <div class="col-md-6">
+      <div class="card border-0" >
+        <div class="card-body">
+          <h3> <a href="#">{{post.title}}</a> </h3>
+          <small class="mb-1 text-muted">{{post.created_at | timesince }} ago | <a href="#">{{post.author}}</a></small>
+          <p  class="card-text pb-5  ">
+            {{post.short_description | truncatewords:10 }}
+          </p>
+        </div>
+      </div>
+ </div>
+  {% endfor %} 
+  {% else %}
+  <p> There is No Post About This Category </p> <br>
+  <a href="{% url 'home' %}">GET BACK TO HOME </a>
+  {% endif %}
+
+
+</br>
+</br>
+</br>
+</br>
+{% endblock %}
