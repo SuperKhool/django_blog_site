@@ -3,7 +3,7 @@ from .models import *
 from . import models
 
 def post_by_category(req,category_id):
-    #fetch the data from category_id
+    #fetch the POST  from category_id
     post=Blog.objects.filter(status="Published",category_id=category_id)
 
     # try:
@@ -17,3 +17,14 @@ def post_by_category(req,category_id):
         'categorys':categorys,
     }
     return render(req,'post_by_category.html',context)
+
+
+
+
+def blogs(request,slug):
+    single_post=get_object_or_404(Blog,slug=slug,status='Published')
+    context={
+        'single_post':single_post,
+    }
+    
+    return render (request,'single_blog_page.html',context)

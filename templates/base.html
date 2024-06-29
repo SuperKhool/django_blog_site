@@ -62,7 +62,7 @@
       
       <div class="card border-0" >
         <div class="card-body">
-          <h3>{{post.title}}</h3>
+          <h3> <a href="{% url 'blogs' post.slug %}">{{post.title}} </a></h3>
           <small class="mb-1 text-muted">{{post.created_at | timesince }} ago | {{post.author}}</small>
           <p class="card-text">{{post.short_description | truncatewords:10 }}</p>
         </div>
@@ -81,7 +81,7 @@
        <!--- Featured Post --> 
        {% for post in simple_post %}
         <div class="blog-post">
-          <h2 class="blog-post-title">{{post.title}}</h2>
+          <h2 class="blog-post-title "><a href="{% url 'blogs' post.slug %}" class="text-dark">{{post.title}}</a></h2>
           <p class="blog-post-meta">{{post.created_at | timesince }} ago | <a href="#">{{post.author}}</a></p>
 
           <p>{{post.short_description}}</p>
@@ -122,7 +122,7 @@
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
      
     </ul>
-    <p  class="text-center text-muted"> <a href="#" > Pranto Ghosh </a></p>
+    <p  class="text-center text-muted"> <a href="https://github.com/superkhool" > Pranto Ghosh </a></p>
   </footer>
 </div>
 </html>
