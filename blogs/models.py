@@ -38,3 +38,11 @@ class Blog(models.Model):
         return self.title
     
     
+class social_link(models.Model):
+    platform=models.CharField(max_length=20)
+    link=models.URLField(max_length=150)
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return self.platform

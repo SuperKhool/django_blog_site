@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h3 class='text-upercase text-warning  ' style='letter-spacing: 2px;' > Your Search Tearm - {{keyword}}</h3>
+  <div class="row mb-2">
+    {% if post %}
+    {% for i in post %} 
+    <div class="col-md-6">
+      <div class="card border-0" >
+        <div class="card-body">
+          <h3> <a href="{% url 'blogs' i.slug %}">{{i.title}}</a> </h3>
+          <small class="mb-1 text-muted">{{i.created_at | timesince }} ago | <a href="#">{{i.author}}</a></small>
+          <p  class="card-text pb-5  ">
+            {{i.short_description | truncatewords:10 }}
+          </p>
+        </div>
+    
+
+  {% endfor %} 
+  {% else %}
+  <p> There is No Post Related Your Search </p> <br>
+  <a href="{% url 'home' %}">GET BACK TO HOME </a>
+  {% endif %}
+
+
+{% endblock %}
