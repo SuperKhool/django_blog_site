@@ -22,6 +22,7 @@ def post_by_category(req,category_id):
 
 
 
+
 def blogs(request,slug):
     single_post=get_object_or_404(Blog,slug=slug,status='Published',)
     context={
