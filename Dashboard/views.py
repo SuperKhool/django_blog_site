@@ -15,10 +15,11 @@ def dashboard(request):
     }
     return render(request,'dashboard/dashboard.html',context)
 
-
+#Load Category here
 def categorys(request):
     return render(request,'dashboard/categorys.html')
 
+#Add Category 
 def add_categorys(request):
     
     if request.method=='POST':
@@ -32,7 +33,7 @@ def add_categorys(request):
     }
     return render(request,'dashboard/add_categorys.html',context)
 
-
+#Edit Category 
 def edit_categorys(request,id):
     edit_categorys=get_object_or_404(category,id=id)
     if request.method == 'POST':
@@ -48,7 +49,7 @@ def edit_categorys(request,id):
     return render(request,'dashboard/edit_categorys.html',context)
 
 
-
+#Delete Category 
 
 def delete_categorys(request,id):
     delete_cat=get_object_or_404(category,id=id)
