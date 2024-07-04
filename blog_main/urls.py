@@ -26,11 +26,18 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home,name='home'),
     path('category/',include('blogs.urls')),
+    #Slug-----
     path('blog/<slug:slug>/',BlogViews.blogs,name='blogs'),
+    #Search
     path('blogs/search/',BlogViews.search,name='search'),
+    #Authentications 
     path('register/',views.register,name='register'),
     path('login/',views.login,name="login"),
     path('logout/',views.logout,name='logout'),
+    
+    #Dashboard
+    path('dashboard/',include('Dashboard.urls')),
+    
 ]
 
 
