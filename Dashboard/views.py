@@ -1,8 +1,9 @@
 from django.shortcuts import render,HttpResponse ,redirect,get_object_or_404
-from Dashboard.forms import BlogPostForm, CategoryForm
+from Dashboard.forms import AddUserForm, BlogPostForm, CategoryForm , EditUserForm
 from blogs.models import Blog, category
 from django.contrib.auth.decorators import login_required
 from django.template.defaultfilters import slugify
+from django.contrib.auth.models import User
 
 # Create your views here.
 @login_required(login_url=('login'))
@@ -105,3 +106,51 @@ def delete_post(request,pk):
     delete_post = get_object_or_404(Blog,pk=pk)
     delete_post.delete()
     return redirect('posts')
+
+
+def users(request):
+    users = User.objects.all()
+    context = {
+        'users':users
+    }
+    return render(request,'dashboard/users.html',context)
+
+
+def add_user(request):
+    form = AddUserForm()
+    if request.method == 'POST':
+        form = AddUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('users')
+        else:
+            print('Form is invalid')
+            print(form.errors)     
+    context = {
+        'form':form,
+    }
+    return render(request,'dashboard/add_user.html',context)
+
+
+def edit_user(rquest,pk):
+    edit_user = get_object_or_404(User,pk=pk)
+    if rquest.method == 'POST':
+        edit_user = EditUserForm(rquest.POST,instance=edit_user)
+        if edit_user.is_valid():
+            edit_user.save()
+            return redirect('users')
+        else:
+            print("invalid Form")
+            print(edit_user.errors)
+    form = EditUserForm(instance=edit_user)
+    context = {
+        "form":form
+    }
+    return render(rquest,'dashboard/edit_user.html',context)
+
+
+
+def delete_user(request,pk):
+    delete_user = get_object_or_404(User,pk=pk)
+    delete_user.delete()
+    return redirect('users')
