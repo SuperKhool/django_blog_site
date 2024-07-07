@@ -47,6 +47,7 @@ def blogs(request,slug):
 def search (request):
     keyword=request.GET.get('keyword')
     post=Blog.objects.filter(Q(title__icontains=keyword) | Q(short_description__icontains=keyword) | Q(blog_body__icontains=keyword),status="Published")
+    #Q ) is an object used to encapsulate a collection of keyword arguments
     context={
         'post':post,
         'keyword':keyword
