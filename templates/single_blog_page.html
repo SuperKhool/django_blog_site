@@ -20,8 +20,45 @@
                 <figure class="mb-4"><img class="img-fluid rounded" src="{{single_post.featured_image.url }}" alt="..." /></figure>
                 <!-- Post content-->
                 <section class="mb-5">
+                    <p class="fs-5 mb-4">{{single_post.short_descriptions}}</p>
                     <p class="fs-5 mb-4">{{single_post.blog_body}}</p>
-                    </section>
+                
+                <!-- Comment Section -->
+                 <h2>Comment's ({{comment_count}})</h2>
+                 {% if  comments %}
+                 <div class="card mt-5">
+                    {% for com in comments %}
+                    <div class="card-body" >
+                        <p class="card-text mb-0" >{{com.comment}}</p>
+                        <span>
+                            <small>From <b>{{ com.user }}</b></small>
+                            <small > | {{ com.created_at | timesince  }} Ago</small>
+                        </span>
+                    </div>
+                    {% endfor %}
+                 </div>
+                 {% else %}
+                 There is No Comment Yet
+                 {% endif %}
+                <br>
+                {% if user.is_authenticated %}
+                <div class="form-group">
+                    <form action="" method="POST" >
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <textarea name="comment" class="form-control" placeholder="Write Your Comment Here"></textarea>
+                            <input type="submit" value="submit" class="btn btn-primary mt-2">
+                        </div>
+
+                    </form>
+                </div>
+                {% else %}
+                <div class="card">
+                    <p>Please <a href="{% url 'login' %}">Login</a> For Comment in This</p>
+                </div>
+                {% endif %}
+
+                </section>
             </article>
         </div>
         <!-- Side widgets-->
